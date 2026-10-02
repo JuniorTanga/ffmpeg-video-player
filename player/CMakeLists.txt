@@ -37,3 +37,12 @@ add_executable(player-sdl2 player-sdl2.c)
 target_include_directories(player-sdl2 PRIVATE ${FFMPEG_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
 target_link_libraries(player-sdl2 PRIVATE ${FFMPEG_LIBRARIES} ${SDL2_LIBRARIES} m)
 
+##
+# player-sdl-window.c is the embeddable variant of player-sdl.c: it plays into
+# an SDL_Window owned by the host application instead of creating its own.
+# See README-window.md. Requires FFmpeg 4.3+ for av_codec_iterate.
+##
+add_library(player-sdl-window STATIC player-sdl-window.c)
+target_include_directories(player-sdl-window PUBLIC ${FFMPEG_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS})
+target_link_libraries(player-sdl-window PUBLIC ${FFMPEG_LIBRARIES} ${SDL2_LIBRARIES} m)
+
